@@ -1,5 +1,8 @@
 name: deploy terraform
 on: [push]
+defaults:
+  run:
+    working-directory: backend
 jobs:
   run_terraform:
     runs-on: ubuntu-latest
