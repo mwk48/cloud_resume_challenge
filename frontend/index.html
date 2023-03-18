@@ -62,12 +62,8 @@
     var num = parseInt(localStorage.getItem('num') || '0');
     fetch('https://w9ekkp4ntk.execute-api.us-east-1.amazonaws.com/v1', {
       method: 'PUT',
-    }).then(_ => {
-      fetch('https://w9ekkp4ntk.execute-api.us-east-1.amazonaws.com/v1', {
-        method: 'GET',
-      }).then(res => res.json()).then(data => {
-        document.getElementById('text').innerHTML = "Current view count: " + data['body']['count'];
-      });
+    }).then(res => res.json()).then(data => {
+      document.getElementById('text').innerHTML = "Current view count: " + data['count'];
     });
   </script>
 </body>
