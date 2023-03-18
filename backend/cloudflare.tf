@@ -1,6 +1,6 @@
 resource "cloudflare_zone" "cf_zone" {
-  zone = local.domain_name
-  type = "full"
+  zone       = local.domain_name
+  type       = "full"
   account_id = var.cloudflare_account_id
 }
 

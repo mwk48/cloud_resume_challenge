@@ -1,6 +1,6 @@
 
 module "cors" {
-  source = "squidfunk/api-gateway-enable-cors/aws"
+  source  = "squidfunk/api-gateway-enable-cors/aws"
   version = "0.3.3"
 
   api_id          = aws_api_gateway_rest_api.api.id
@@ -17,19 +17,19 @@ resource "aws_api_gateway_rest_api" "api" {
 
 
 resource "aws_api_gateway_method" "method" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  resource_id = aws_api_gateway_rest_api.api.root_resource_id
-  http_method = "PUT"
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  resource_id   = aws_api_gateway_rest_api.api.root_resource_id
+  http_method   = "PUT"
   authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "integration" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  resource_id = aws_api_gateway_rest_api.api.root_resource_id
-  http_method = aws_api_gateway_method.method.http_method
-  type = "AWS_PROXY"
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_rest_api.api.root_resource_id
+  http_method             = aws_api_gateway_method.method.http_method
+  type                    = "AWS_PROXY"
   integration_http_method = "POST"
-  uri = aws_lambda_function.set_visit_count.invoke_arn
+  uri                     = aws_lambda_function.set_visit_count.invoke_arn
 }
 
 resource "aws_api_gateway_deployment" "deployment" {
@@ -48,8 +48,8 @@ resource "aws_api_gateway_method_response" "response_200" {
 }
 
 resource "aws_api_gateway_stage" "stage" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name = "v1"
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  stage_name    = "v1"
   deployment_id = aws_api_gateway_deployment.deployment.id
 }
 
@@ -69,6 +69,6 @@ resource "aws_api_gateway_method_settings" "all" {
 
   settings {
     throttling_burst_limit = 10
-    throttling_rate_limit = 1
+    throttling_rate_limit  = 1
   }
 }
