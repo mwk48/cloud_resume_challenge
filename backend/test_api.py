@@ -1,7 +1,7 @@
 import requests
 import pytest
 
-base_url = "https://w9ekkp4ntk.execute-api.us-east-1.amazonaws.com/v1"
+base_url = "https://kbdsejhdtd.execute-api.us-east-1.amazonaws.com/v1"
 
 
 def test_api_put():
