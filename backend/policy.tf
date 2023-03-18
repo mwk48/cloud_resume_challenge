@@ -43,3 +43,26 @@ resource "aws_iam_policy" "dynamodb_policy" {
         ]
     })
 }
+
+data "aws_iam_policy_document" "AWSLambdaTrustPolicy" {
+  statement {
+    actions    = ["sts:AssumeRole"]
+    effect     = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.bucket.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.s3.iam_arn]
+    }
+  }
+}
