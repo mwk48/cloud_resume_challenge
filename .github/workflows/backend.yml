@@ -14,12 +14,12 @@ jobs:
       TF_VAR_CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          aws-region: us-east-1
-          role-session-name: dev-resume
+      - name: Add profile credentials to ~/.aws/credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.YOUR_ACCESS_KEY }} --profile test-1
+          aws configure set aws_secret_access_key ${{ secrets.YOUR_SECRET_ACCESS_KEY }} --profile test-1
+      - name: Test AWS Creds
+        run: aws sts get-caller-identity
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: latest
@@ -38,4 +38,3 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color
-      
