@@ -11,6 +11,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v3
+      - name: export env
+        run: |
+          echo "export TF_VAR_cloudflare_account_id=${{ secrets.cloudflare_account_id }}
+          echo "export TF_VAR_CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -20,11 +24,6 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: latest
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
-
       - name: Terraform Init
         id: init
         run: terraform init
