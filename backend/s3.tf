@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "cloud-resume"
+  bucket = "mwk0408-cloud-resume"
 
 }
 

@@ -1,5 +1,11 @@
 name: deploy terraform
-on: [push]
+on:
+  workflow_run:
+    workflows: ["deploy terraform"]
+    branches: [main]
+    types:
+      - completed
+
 defaults:
   run:
     working-directory: frontend
@@ -10,7 +16,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      S3_BUCKET: cloud-resume
+      S3_BUCKET: mwk0408-cloud-resume
     steps:
       - uses: actions/checkout@v3
       - name: Configure AWS credentials from Test account
