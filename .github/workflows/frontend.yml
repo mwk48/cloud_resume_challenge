@@ -32,9 +32,9 @@ jobs:
       - name: upload to s3
         run: aws s3 sync . s3://$S3_BUCKET
       - name: export distribution id
-      
+
         run: |
           sudo apt-get install -y jq
-          export CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[0]" | jq -r '.id')
+          echo "CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[0]" | jq -r '.id')" >> $GITHUB_ENV
       - name: invalidate cloudfront
         run: aws cloudfront create-invalidation --distribution-id ${env.CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
