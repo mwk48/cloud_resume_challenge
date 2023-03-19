@@ -36,6 +36,6 @@ jobs:
         run: |
           sudo apt-get install -y jq
           echo "CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[0]" | jq -r '.id')" >> $GITHUB_ENV
-          echo "::add-mask::$CLOUDFRONT_DISTRIBUTION_ID"
+          echo "::add-mask::${env.CLOUDFRONT_DISTRIBUTION_ID}"
       - name: invalidate cloudfront
         run: aws cloudfront create-invalidation --distribution-id ${{env.CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*"
