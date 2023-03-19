@@ -54,3 +54,12 @@ jobs:
         id: apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -no-color
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - name: install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: run python api test
+        run: |
+          pytest -v
