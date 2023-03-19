@@ -10,8 +10,15 @@ terraform {
       version = ">= 2.0"
     }
   }
+  cloud {
+    organization = "mwk0408"
 
+    workspaces {
+      name = "example-workspace"
+    }
+  }
 }
+
 
 provider "aws" {
   region  = "us-east-1"
