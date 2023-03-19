@@ -22,7 +22,7 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "cloud-resume"
+  profile = "dev-resume"
 }
 
 provider "cloudflare" {
@@ -50,6 +50,8 @@ locals {
   region      = data.aws_region.current.name
   domain_name = "wingkin.eu.org"
   origin_id   = "s3-${aws_s3_bucket.bucket.bucket}"
+  repo_name = "cloud_resume_challenge"
+  github_username = "mwk48"
 }
 
 output "account_id" {
