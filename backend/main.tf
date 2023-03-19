@@ -46,11 +46,11 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
-  account_id  = data.aws_caller_identity.current.account_id
-  region      = data.aws_region.current.name
-  domain_name = "wingkin.eu.org"
-  origin_id   = "s3-${aws_s3_bucket.bucket.bucket}"
-  repo_name = "cloud_resume_challenge"
+  account_id      = data.aws_caller_identity.current.account_id
+  region          = data.aws_region.current.name
+  domain_name     = "wingkin.eu.org"
+  origin_id       = "s3-${aws_s3_bucket.bucket.bucket}"
+  repo_name       = "cloud_resume_challenge"
   github_username = "mwk48"
 }
 
