@@ -18,12 +18,20 @@ provider "aws" {
   profile = "cloud-resume"
 }
 
-provider "cloudflare" {}
+provider "cloudflare" {
+  api_token = var.CLOUDFLARE_API_TOKEN
+}
 
 variable "cloudflare_account_id" {
   type        = string
   default     = ""
   description = "cloudflare account id"
+}
+
+variable "CLOUDFLARE_API_TOKEN" {
+  type        = string
+  default     = ""
+  description = "cloudflare api token"
 }
 
 
