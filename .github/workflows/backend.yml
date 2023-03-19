@@ -26,6 +26,9 @@ jobs:
           aws configure set aws_session_token ${{ env.AWS_SESSION_TOKEN }} --profile cloud-resume
       - name: Test AWS Creds
         run: aws sts get-caller-identity
+      - name: export env
+        run: |
+          export
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: latest
