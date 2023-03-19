@@ -1,0 +1,27 @@
+name: deploy terraform
+on: [push]
+defaults:
+  run:
+    working-directory: frontend
+jobs:
+  run_terraform:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      S3_BUCKET: mwk0408-cloud-resume
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
+      - name: Test AWS Creds
+        run: aws sts get-caller-identity
+      - name: export env
+        run: |
+          export
+      - name: upload to s3
+        run: aws s3 sync . s3://$S3_BUCKET
