@@ -10,7 +10,7 @@ defaults:
   run:
     working-directory: frontend
 jobs:
-  run_terraform:
+  deploy_s3:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
