@@ -10,7 +10,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      S3_BUCKET: mwk0408-cloud-resume
+      S3_BUCKET: cloud-resume
     steps:
       - uses: actions/checkout@v3
       - name: Configure AWS credentials from Test account
@@ -25,3 +25,7 @@ jobs:
           export
       - name: upload to s3
         run: aws s3 sync . s3://$S3_BUCKET
+      - name: export distribution id
+        run: echo "CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query 'DistributionList.Items[?Origins.Items[0].Id==`S3-$S3_BUCKET`].Id' --output text)" >> $GITHUB_ENV
+      - name: invalidate cloudfront
+        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
