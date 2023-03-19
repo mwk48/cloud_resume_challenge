@@ -1,4 +1,4 @@
-name: deploy terraform
+name: deploy frontend
 on:
   workflow_run:
     workflows: ["deploy terraform"]
