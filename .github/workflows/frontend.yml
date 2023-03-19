@@ -34,4 +34,4 @@ jobs:
       - name: export distribution id
         run: echo "CLOUDFRONT_DISTRIBUTION_ID=$(aws cloudfront list-distributions --query 'DistributionList.Items[?Origins.Items[0].Id==`S3-$S3_BUCKET`].Id' --output text)" >> $GITHUB_ENV
       - name: invalidate cloudfront
-        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${env.CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
