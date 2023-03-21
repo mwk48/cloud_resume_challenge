@@ -7,13 +7,13 @@ lambda_client = boto3.client('lambda')
 
 def lambda_handler(event, context):
     data = lambda_client.invoke(FunctionName='get_visit_count',
-                                InvocationType='RequestResponse', Payload=json.dumps({}))
+                                InvocationType='RequestResponse', Payload=json.dumps(event))
     # print(data.keys())
     # print(data['Payload'])
     json_data = json.loads(data['Payload'].read())
     body = json.loads(json_data['body'])
     count = body['count']
-    id = body['id']
+    id = event.get('queryStringParameters', {}).get('id', '0')
     client.put_item(TableName='visit_count', Item={
                     'id': {'N': str(id)}, 'count': {'N': str(count+1)}})
     return {

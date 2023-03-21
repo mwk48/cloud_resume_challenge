@@ -5,11 +5,12 @@ client = boto3.client('dynamodb')
 
 
 def lambda_handler(event, context):
+    id = event.get('queryStringParameters', {}).get('id', '0')
     data = client.get_item(
         TableName='visit_count',
         Key={
             'id': {
-                'N': '0'
+                'N': id
             }
         }
     )
@@ -22,8 +23,8 @@ def lambda_handler(event, context):
         },
         'body': json.dumps(
             {
-                'count': int(data.get('Item', {}).get('count', {}).get('N', 0)),
-                'id': 0
+                'count': int(data.get('Item', {}).get('count', {}).get('N', int(id))),
+                'id': int(id)
             }
         )
     }
