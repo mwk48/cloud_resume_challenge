@@ -1,8 +1,10 @@
 __pycache__
 .pytest_cache
 
+# terraform
 terraform.tfstate*
 .terraform/
+terraform.tfvars
 
 # intellij and vscode
 .idea/
