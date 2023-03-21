@@ -21,6 +21,9 @@ resource "aws_api_gateway_method" "method" {
   resource_id   = aws_api_gateway_rest_api.api.root_resource_id
   http_method   = "PUT"
   authorization = "NONE"
+  request_parameters = {
+    "integration.request.querystring.id"=true
+  }
 }
 
 resource "aws_api_gateway_integration" "integration" {
