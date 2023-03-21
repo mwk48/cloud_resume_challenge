@@ -62,7 +62,7 @@
   </div>
   -->
   <script>
-    fetch('https://kbdsejhdtd.execute-api.us-east-1.amazonaws.com/v1', {
+    fetch('https://kbdsejhdtd.execute-api.us-east-1.amazonaws.com/v1?id=0', {
       method: 'PUT',
     }).then(res => res.json()).then(data => {
       document.getElementById('text').innerHTML = "Current view count: " + data['count'];

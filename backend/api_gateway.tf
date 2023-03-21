@@ -22,7 +22,7 @@ resource "aws_api_gateway_method" "method" {
   http_method   = "PUT"
   authorization = "NONE"
   request_parameters = {
-    "integration.request.querystring.id"=true
+    "method.request.querystring.id"=true
   }
 }
 
