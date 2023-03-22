@@ -1,11 +1,5 @@
 name: deploy frontend
-on:
-  workflow_run:
-    workflows: ["deploy terraform"]
-    branches: [main]
-    types:
-      - completed
-
+on: [push]
 defaults:
   run:
     working-directory: frontend
