@@ -15,3 +15,4 @@ def test_api_put():
 def test_api_error():
     response1 = requests.put(base_url, params={'id': '2'})
     assert response1.status_code == 400
+    assert response1.json()['message'] == 'Invalid id'
